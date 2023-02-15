@@ -1,0 +1,4 @@
+wheel
+python-documentcloud==3.0.4
+requests
+datefinder
