@@ -16,13 +16,7 @@ def get_wikidata_id(date):
 
 def date_to_entity_json(datetime):
     wikidata_id = get_wikidata_id(datetime.date())
-    return wikidata_id
-    # client = Client()
-    # entity = client.get(wikidata_id, load=True)
-    # if entity.state != EntityState.loaded:
-    #     raise ValueError("Wikidata ID does not exist")
-
-    return {"wikidata_id": "hey"}
+    return {"wikidata_id": wikidata_id}
 
 
 def get_date_entities_from_text(text):
