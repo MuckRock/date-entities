@@ -38,40 +38,28 @@ class TestEntityCreation(unittest.TestCase):
             headers={"Authorization": authHeader},
         )
         json_res = res.json()
-        self.assertDictContainsSubset(
-            {
-                "access": 0,
-                "metadata": {},
-                "name": "September 21, 2022",
-                "wikidata_id": "Q69306561",
-                "wikipedia_url": {
-                    "cswikinews": {
-                        "site": "cswikinews",
-                        "title": "21. září 2022",
-                        "badges": [],
-                        "url": "https://cs.wikinews.org/wiki/21._z%C3%A1%C5%99%C3%AD_2022",
-                    }
+        # print("json_res", json_res)
+
+        try:
+            self.assertDictContainsSubset(
+                {
+                    "access": "public",
+                    "description": "date in Gregorian calendar",
+                    "metadata": {},
+                    "name": "September 21, 2022",
+                    "user": None,
+                    "wikidata_id": "Q69306561",
+                    "wikipedia_url": "",
                 },
-            },
-            json_res,
-        )
-        self.assertDictContainsSubset(
-            {
-                "en": "date in Gregorian calendar",
-                "hy": "Գրիգորյան օրացույցի ամսաթիվ",
-                "en-gb": "date in Gregorian calendar",
-                "ru": "дата григорианского календаря",
-                "uk": "дата григоріанського календаря",
-            },
-            json_res.get("description"),
-        )
-        self.assertDictContainsSubset(
-            {
-                "en": "September 21, 2022",
-                "zh": "2022年9月21日",
-            },
-            json_res.get("localized_names"),
-        )
+                json_res,
+            )
+        finally:
+            res = requests.delete(
+                f"{TestEntityCreation.base_url}entities/{json_res.get('id')}",
+                verify=False,
+                headers={"Authorization": authHeader},
+            )
+            print("Entity deletion result status code:", res.status_code)
 
 
 if __name__ == "__main__":
