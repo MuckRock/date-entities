@@ -25,6 +25,8 @@ def get_wikidata_id(date):
 
 def get_date_wikidata_ids_from_text(text):
     dates = datefinder.find_dates(text)
+    # TODO: Also get locations within text? Undo the deduping if we do that.
+    dates = list(set(dates))
     return list(
         filter(
             lambda id: id is not None,
