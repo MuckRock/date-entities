@@ -10,6 +10,7 @@ logger = Logger("get_date_entities")
 
 
 def get_wikidata_id(date):
+    # TODO: Local cache.
     wikidata_url = f"https://www.wikidata.org/w/api.php?action=wbsearchentities&search={date.isoformat()}&format=json&errorformat=plaintext&language=en&uselang=en&type=item"
     # print("url", wikidata_url)
 
