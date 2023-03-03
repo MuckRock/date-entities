@@ -1,11 +1,14 @@
+import datetime
 import unittest
 
 import requests
 
+from date_entities.add_entities_for_dates import add_entity_for_date
+
+base_url = "https://api.dev.documentcloud.org/api/"
+
 
 class TestEntityCreation(unittest.TestCase):
-    base_url = "https://api.dev.documentcloud.org/api/"
-
     def test_simple(self):
         authRes = requests.post(
             "https://dev.squarelet.com/api/token/",
@@ -14,15 +17,9 @@ class TestEntityCreation(unittest.TestCase):
             verify=False,
         )
         access_token = authRes.json().get("access")
-        authHeader = f"Bearer {access_token}"
-
-        res = requests.post(
-            f"{TestEntityCreation.base_url}entities/",
-            verify=False,
-            data={"wikidata_id": "Q69306561"},
-            headers={"Authorization": authHeader},
+        json_res = add_entity_for_date(
+            access_token, base_url, datetime.date(2022, 9, 21)
         )
-        json_res = res.json()
         # print("json_res", json_res)
 
         try:
@@ -39,8 +36,9 @@ class TestEntityCreation(unittest.TestCase):
                 json_res,
             )
         finally:
+            authHeader = f"Bearer {access_token}"
             res = requests.delete(
-                f"{TestEntityCreation.base_url}entities/{json_res.get('id')}",
+                f"{base_url}entities/{json_res.get('id')}",
                 verify=False,
                 headers={"Authorization": authHeader},
             )

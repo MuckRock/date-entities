@@ -1,6 +1,6 @@
 import unittest
 
-from date_entities.get_date_entity_ids_from_text import get_date_wikidata_ids_from_text
+from date_entities.date_extraction import get_date_wikidata_ids_from_text
 
 
 class TestDateEntityExtraction(unittest.TestCase):
