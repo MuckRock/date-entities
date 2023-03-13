@@ -8,7 +8,7 @@ var occs = [
     "document": {
       "id": 23700962,
       "title": "cat cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -20,7 +20,7 @@ var occs = [
     "document": {
       "id": 23700962,
       "title": "dog potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -32,7 +32,7 @@ var occs = [
     "document": {
       "id": 23700962,
       "title": "potato report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -44,7 +44,7 @@ var occs = [
     "document": {
       "id": 23700962,
       "title": "crime election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -54,9 +54,9 @@ var occs = [
       "date": "2020-06-18T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "report cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -66,9 +66,9 @@ var occs = [
       "date": "2020-06-18T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "culture culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -78,9 +78,9 @@ var occs = [
       "date": "2020-06-19T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "election robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -90,9 +90,9 @@ var occs = [
       "date": "2020-06-21T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "robot dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -102,9 +102,9 @@ var occs = [
       "date": "2020-06-24T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "cat crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -114,9 +114,9 @@ var occs = [
       "date": "2020-06-28T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "dog culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -126,9 +126,9 @@ var occs = [
       "date": "2020-06-28T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "potato potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -138,9 +138,9 @@ var occs = [
       "date": "2020-06-29T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "crime report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -150,9 +150,9 @@ var occs = [
       "date": "2020-07-01T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "report election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -162,9 +162,9 @@ var occs = [
       "date": "2020-07-04T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "culture cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -174,9 +174,9 @@ var occs = [
       "date": "2020-07-08T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "election potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -186,9 +186,9 @@ var occs = [
       "date": "2020-07-08T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "robot robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -198,9 +198,9 @@ var occs = [
       "date": "2020-07-09T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "cat dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -210,9 +210,9 @@ var occs = [
       "date": "2020-07-11T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "dog crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -222,9 +222,9 @@ var occs = [
       "date": "2020-07-14T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "potato culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -234,9 +234,9 @@ var occs = [
       "date": "2020-07-18T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "crime robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -246,9 +246,9 @@ var occs = [
       "date": "2020-07-18T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "report report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -258,9 +258,9 @@ var occs = [
       "date": "2020-07-19T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "culture election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -270,9 +270,9 @@ var occs = [
       "date": "2020-07-21T22:19:16.074Z"
     },
     "document": {
-      "id": 23700963,
+      "id": 23700960,
       "title": "election cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -284,7 +284,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "robot potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -296,7 +296,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "cat report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -308,7 +308,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "dog dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -320,7 +320,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "potato crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -332,7 +332,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "crime culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -344,7 +344,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "report robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -356,7 +356,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "culture dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -368,7 +368,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "election election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -380,7 +380,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "robot cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -392,7 +392,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "cat potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -404,7 +404,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "dog report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -416,7 +416,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "potato election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -428,7 +428,7 @@ var occs = [
     "document": {
       "id": 1000035,
       "title": "crime crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -440,7 +440,7 @@ var occs = [
     "document": {
       "id": 1000036,
       "title": "report culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -452,7 +452,7 @@ var occs = [
     "document": {
       "id": 1000037,
       "title": "culture robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -464,7 +464,7 @@ var occs = [
     "document": {
       "id": 1000038,
       "title": "election dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -476,7 +476,7 @@ var occs = [
     "document": {
       "id": 1000039,
       "title": "robot crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -488,7 +488,7 @@ var occs = [
     "document": {
       "id": 1000040,
       "title": "cat cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -500,7 +500,7 @@ var occs = [
     "document": {
       "id": 1000041,
       "title": "dog potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -512,7 +512,7 @@ var occs = [
     "document": {
       "id": 1000042,
       "title": "potato report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -524,7 +524,7 @@ var occs = [
     "document": {
       "id": 1000043,
       "title": "crime election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -536,7 +536,7 @@ var occs = [
     "document": {
       "id": 1000044,
       "title": "report cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -548,7 +548,7 @@ var occs = [
     "document": {
       "id": 1000045,
       "title": "culture culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -560,7 +560,7 @@ var occs = [
     "document": {
       "id": 1000046,
       "title": "election robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -572,7 +572,7 @@ var occs = [
     "document": {
       "id": 1000047,
       "title": "robot dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -584,7 +584,7 @@ var occs = [
     "document": {
       "id": 1000048,
       "title": "cat crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -596,7 +596,7 @@ var occs = [
     "document": {
       "id": 1000049,
       "title": "dog culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -608,7 +608,7 @@ var occs = [
     "document": {
       "id": 1000050,
       "title": "potato potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -620,7 +620,7 @@ var occs = [
     "document": {
       "id": 1000051,
       "title": "crime report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -632,7 +632,7 @@ var occs = [
     "document": {
       "id": 1000052,
       "title": "report election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -644,7 +644,7 @@ var occs = [
     "document": {
       "id": 1000053,
       "title": "culture cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -656,7 +656,7 @@ var occs = [
     "document": {
       "id": 1000054,
       "title": "election potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -668,7 +668,7 @@ var occs = [
     "document": {
       "id": 1000055,
       "title": "robot robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -680,7 +680,7 @@ var occs = [
     "document": {
       "id": 1000056,
       "title": "cat dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -692,7 +692,7 @@ var occs = [
     "document": {
       "id": 1000057,
       "title": "dog crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -704,7 +704,7 @@ var occs = [
     "document": {
       "id": 1000058,
       "title": "potato culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -716,7 +716,7 @@ var occs = [
     "document": {
       "id": 1000059,
       "title": "crime robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -728,7 +728,7 @@ var occs = [
     "document": {
       "id": 1000060,
       "title": "report report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -740,7 +740,7 @@ var occs = [
     "document": {
       "id": 1000061,
       "title": "culture election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -752,7 +752,7 @@ var occs = [
     "document": {
       "id": 1000062,
       "title": "election cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -764,7 +764,7 @@ var occs = [
     "document": {
       "id": 1000063,
       "title": "robot potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -776,7 +776,7 @@ var occs = [
     "document": {
       "id": 1000064,
       "title": "cat report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -788,7 +788,7 @@ var occs = [
     "document": {
       "id": 1000065,
       "title": "dog dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -800,7 +800,7 @@ var occs = [
     "document": {
       "id": 1000066,
       "title": "potato crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -812,7 +812,7 @@ var occs = [
     "document": {
       "id": 1000067,
       "title": "crime culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -824,7 +824,7 @@ var occs = [
     "document": {
       "id": 1000068,
       "title": "report robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -836,7 +836,7 @@ var occs = [
     "document": {
       "id": 1000069,
       "title": "culture dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -848,7 +848,7 @@ var occs = [
     "document": {
       "id": 1000070,
       "title": "election election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -860,7 +860,7 @@ var occs = [
     "document": {
       "id": 1000071,
       "title": "robot cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -872,7 +872,7 @@ var occs = [
     "document": {
       "id": 1000072,
       "title": "cat potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -884,7 +884,7 @@ var occs = [
     "document": {
       "id": 1000073,
       "title": "dog report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -896,7 +896,7 @@ var occs = [
     "document": {
       "id": 1000074,
       "title": "potato election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -908,7 +908,7 @@ var occs = [
     "document": {
       "id": 1000075,
       "title": "crime crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -920,7 +920,7 @@ var occs = [
     "document": {
       "id": 1000076,
       "title": "report culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -932,7 +932,7 @@ var occs = [
     "document": {
       "id": 1000077,
       "title": "culture robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -944,7 +944,7 @@ var occs = [
     "document": {
       "id": 1000078,
       "title": "election dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -956,7 +956,7 @@ var occs = [
     "document": {
       "id": 1000079,
       "title": "robot crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -968,7 +968,7 @@ var occs = [
     "document": {
       "id": 1000080,
       "title": "cat cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -980,7 +980,7 @@ var occs = [
     "document": {
       "id": 1000081,
       "title": "dog potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -992,7 +992,7 @@ var occs = [
     "document": {
       "id": 1000082,
       "title": "potato report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1004,7 +1004,7 @@ var occs = [
     "document": {
       "id": 1000083,
       "title": "crime election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1016,7 +1016,7 @@ var occs = [
     "document": {
       "id": 1000084,
       "title": "report cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1028,7 +1028,7 @@ var occs = [
     "document": {
       "id": 1000085,
       "title": "culture culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1040,7 +1040,7 @@ var occs = [
     "document": {
       "id": 1000086,
       "title": "election robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1052,7 +1052,7 @@ var occs = [
     "document": {
       "id": 1000087,
       "title": "robot dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1064,7 +1064,7 @@ var occs = [
     "document": {
       "id": 1000088,
       "title": "cat crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1076,7 +1076,7 @@ var occs = [
     "document": {
       "id": 1000089,
       "title": "dog culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1088,7 +1088,7 @@ var occs = [
     "document": {
       "id": 1000090,
       "title": "potato potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1100,7 +1100,7 @@ var occs = [
     "document": {
       "id": 1000091,
       "title": "crime report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1112,7 +1112,7 @@ var occs = [
     "document": {
       "id": 1000092,
       "title": "report election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1124,7 +1124,7 @@ var occs = [
     "document": {
       "id": 1000093,
       "title": "culture cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1136,7 +1136,7 @@ var occs = [
     "document": {
       "id": 1000094,
       "title": "election potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1148,7 +1148,7 @@ var occs = [
     "document": {
       "id": 1000095,
       "title": "robot robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1160,7 +1160,7 @@ var occs = [
     "document": {
       "id": 1000096,
       "title": "cat dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1172,7 +1172,7 @@ var occs = [
     "document": {
       "id": 1000097,
       "title": "dog crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1184,7 +1184,7 @@ var occs = [
     "document": {
       "id": 1000098,
       "title": "potato culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1196,7 +1196,7 @@ var occs = [
     "document": {
       "id": 1000099,
       "title": "crime robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1208,7 +1208,7 @@ var occs = [
     "document": {
       "id": 1000100,
       "title": "report report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1220,7 +1220,7 @@ var occs = [
     "document": {
       "id": 1000101,
       "title": "culture election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1232,7 +1232,7 @@ var occs = [
     "document": {
       "id": 1000102,
       "title": "election cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1244,7 +1244,7 @@ var occs = [
     "document": {
       "id": 1000103,
       "title": "robot potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1256,7 +1256,7 @@ var occs = [
     "document": {
       "id": 1000104,
       "title": "cat report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1268,7 +1268,7 @@ var occs = [
     "document": {
       "id": 1000105,
       "title": "dog dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1280,7 +1280,7 @@ var occs = [
     "document": {
       "id": 1000106,
       "title": "potato crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1292,7 +1292,7 @@ var occs = [
     "document": {
       "id": 1000107,
       "title": "crime culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1304,7 +1304,7 @@ var occs = [
     "document": {
       "id": 1000108,
       "title": "report robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1316,7 +1316,7 @@ var occs = [
     "document": {
       "id": 1000109,
       "title": "culture dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1328,7 +1328,7 @@ var occs = [
     "document": {
       "id": 1000110,
       "title": "election election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1340,7 +1340,7 @@ var occs = [
     "document": {
       "id": 1000111,
       "title": "robot cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1352,7 +1352,7 @@ var occs = [
     "document": {
       "id": 1000112,
       "title": "cat potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1364,7 +1364,7 @@ var occs = [
     "document": {
       "id": 1000113,
       "title": "dog report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1376,7 +1376,7 @@ var occs = [
     "document": {
       "id": 1000114,
       "title": "potato election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1388,7 +1388,7 @@ var occs = [
     "document": {
       "id": 1000115,
       "title": "crime crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1400,7 +1400,7 @@ var occs = [
     "document": {
       "id": 1000116,
       "title": "report culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1412,7 +1412,7 @@ var occs = [
     "document": {
       "id": 1000117,
       "title": "culture robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1424,7 +1424,7 @@ var occs = [
     "document": {
       "id": 1000118,
       "title": "election dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1436,7 +1436,7 @@ var occs = [
     "document": {
       "id": 1000119,
       "title": "robot crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1448,7 +1448,7 @@ var occs = [
     "document": {
       "id": 1000120,
       "title": "cat cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1460,7 +1460,7 @@ var occs = [
     "document": {
       "id": 1000121,
       "title": "dog potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1472,7 +1472,7 @@ var occs = [
     "document": {
       "id": 1000122,
       "title": "potato report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1484,7 +1484,7 @@ var occs = [
     "document": {
       "id": 1000123,
       "title": "crime election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1496,7 +1496,7 @@ var occs = [
     "document": {
       "id": 1000124,
       "title": "report cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1508,7 +1508,7 @@ var occs = [
     "document": {
       "id": 1000125,
       "title": "culture culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1520,7 +1520,7 @@ var occs = [
     "document": {
       "id": 1000126,
       "title": "election robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1532,7 +1532,7 @@ var occs = [
     "document": {
       "id": 1000127,
       "title": "robot dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1544,7 +1544,7 @@ var occs = [
     "document": {
       "id": 1000128,
       "title": "cat crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1556,7 +1556,7 @@ var occs = [
     "document": {
       "id": 1000129,
       "title": "dog culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1568,7 +1568,7 @@ var occs = [
     "document": {
       "id": 1000130,
       "title": "potato potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1580,7 +1580,7 @@ var occs = [
     "document": {
       "id": 1000131,
       "title": "crime report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1592,7 +1592,7 @@ var occs = [
     "document": {
       "id": 1000132,
       "title": "report election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1604,7 +1604,7 @@ var occs = [
     "document": {
       "id": 1000133,
       "title": "culture cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1616,7 +1616,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "election potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1628,7 +1628,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "robot robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1640,7 +1640,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "cat dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1652,7 +1652,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "dog crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1664,7 +1664,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "potato culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1676,7 +1676,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "crime robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1688,7 +1688,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "report report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1700,7 +1700,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "culture election",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1712,7 +1712,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "election cat",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1724,7 +1724,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "robot potato",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1736,7 +1736,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "cat report",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1748,7 +1748,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "dog dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1760,7 +1760,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "potato crime",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1772,7 +1772,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "crime culture",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1784,7 +1784,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "report robot",
-      "url": "23700963"
+      "url": "23700960"
     }
   },
   {
@@ -1796,7 +1796,7 @@ var occs = [
     "document": {
       "id": 23700953,
       "title": "culture dog",
-      "url": "23700963"
+      "url": "23700960"
     }
   }
 ];
@@ -1806,7 +1806,15 @@ const startTime = getDateTimeFromTitle(occs[0].entity.title);
 const endTime = getDateTimeFromTitle(occs[occs.length - 1].entity.title);
 var timeScale = d3.scaleLinear().domain([startTime, endTime]).range([0, timelineLength]);
 document.getElementById('canvas').setAttribute('height', timelineLength);
-docFrameSel = d3.select('#doc-frame');
+var docContainerSel = d3.select('.doc-container');
+var minimapSel = d3.select('.minimap');
+var minimapToggleSel = d3.select('#minimap-toggle-button');
+var docCloseSel = d3.select('#doc-close-button');
+
+setUpZoom();
+
+minimapToggleSel.on('click', onMinimapToggleClick);
+docCloseSel.on('click', onDocCloseClick);
 
 var newTicks = d3.selectAll('.timeline-layer').selectAll('.tick')
   .data(occs, makeOccId)
@@ -1835,8 +1843,26 @@ function makeOccId(occ) {
 }
 
 function onTickClick(e, occ) {
-  docFrameSel.attr('src', `https://embed.documentcloud.org/documents/${occ.document.id}/?embed=1&amp;responsive=1&amp;title=1`);
-docFrameSel.attr('title', occ.document.title);
-  docFrameSel.classed('hidden', false);
+  docContainerSel.attr('src', `https://embed.documentcloud.org/documents/${occ.document.id}/?embed=1&amp;responsive=1&amp;title=1`);
+docContainerSel.attr('title', occ.document.title);
+  docContainerSel.classed('hidden', false);
 }
 
+function onMinimapToggleClick() {
+  minimapSel.classed('hidden', !minimapSel.classed('hidden'));
+  minimapToggleSel.text(minimapSel.classed('hidden') ? 'Show minimap' : 'Hide minimap');
+}
+
+function onDocCloseClick() {
+  docContainerSel.classed('hidden', true);
+}
+
+function setUpZoom() {
+  var zoomLayer = minimapSel.select('#zoom-layer');
+  var zoom = d3.zoom().scaleExtent([0.125, 8]).on('zoom', zoomed);
+  minimapSel.call(zoom);
+
+  function zoomed(zoomEvent) {
+    zoomLayer.attr('transform', zoomEvent.transform);
+  }
+}
