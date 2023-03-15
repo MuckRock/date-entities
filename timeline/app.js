@@ -1816,7 +1816,7 @@ setUpZoom();
 minimapToggleSel.on('click', onMinimapToggleClick);
 docCloseSel.on('click', onDocCloseClick);
 
-var newTicks = d3.selectAll('.timeline-layer').selectAll('.tick')
+var newTicks = d3.select('.main-timeline-container .timeline-layer').selectAll('.tick')
   .data(occs, makeOccId)
   .enter()
   .append('g')
@@ -1859,10 +1859,12 @@ function onDocCloseClick() {
 
 function setUpZoom() {
   var zoomLayer = minimapSel.select('#zoom-layer');
-  var zoom = d3.zoom().scaleExtent([0.125, 8]).on('zoom', zoomed);
+  var zoom = d3.zoom()
+    .scaleExtent([0.125, 8]).on('zoom', zoomed)
   minimapSel.call(zoom);
 
   function zoomed(zoomEvent) {
-    zoomLayer.attr('transform', zoomEvent.transform);
+    //zoomLayer.attr('transform', zoomEvent.transform);
+    console.log('zoomEvent', zoomEvent);
   }
 }
