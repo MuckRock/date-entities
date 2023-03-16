@@ -1,5 +1,6 @@
 :root {
-  --border-style: 2px solid hsla(0, 0%, 0%, 0.8);
+  --darkened: hsla(0, 0%, 0%, 0.8);
+  --border-style: 2px solid var(--darkened);
   --border-rad: 2px;
 }
 
@@ -97,12 +98,21 @@ line {
   margin-top: 0;
 }
 
-.minimap {
+.year-map {
   position: sticky;
   top: 30px;
   border: var(--border-style);
   border-radius: var(--border-rad);
-  background-color: hsl(210, 70%, 80%);
+  background-color: white;
+}
+
+.year {
+  cursor: pointer;
+}
+
+.year rect {
+  stroke: var(--darkened);
+  fill: hsl(210, 70%, 80%);
 }
 
 .timelines-container {
