@@ -98,7 +98,7 @@ line {
   margin-top: 0;
 }
 
-.year-map {
+.high-level-map {
   position: sticky;
   top: 30px;
   border: var(--border-style);
@@ -106,13 +106,17 @@ line {
   background-color: white;
 }
 
-.year {
+.year,.month {
   cursor: pointer;
 }
 
-.year rect {
+.bar {
   stroke: var(--darkened);
   fill: hsl(210, 70%, 80%);
+}
+
+.high-level-map > text {
+  fill: var(--darkened);
 }
 
 .timelines-container {

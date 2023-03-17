@@ -1806,6 +1806,7 @@ var occs = [
 const timelineLength = occs.length * 50;
 const maxBarLength = 200;
 const yearHeight = 64;
+const monthHeight = 64;
 const startTime = getDateTimeFromTitle(occs[0].entity.title);
 const endTime = getDateTimeFromTitle(occs[occs.length - 1].entity.title);
 
@@ -1854,9 +1855,11 @@ var yearYScale = d3
 
 document.getElementById('canvas').setAttribute('height', timelineLength);
 var docContainerSel = d3.select('.doc-container');
+var docFrameSel = d3.select('#doc-frame');
 var yearMapSel = d3.select('.year-map');
 var yearMapToggleSel = d3.select('#year-map-toggle-button');
 var docCloseSel = d3.select('#doc-close-button');
+var monthContainer = d3.select('.month-map');
 
 setUpZoom();
 
@@ -1864,6 +1867,7 @@ yearMapToggleSel.on('click', onYearMapToggleClick);
 docCloseSel.on('click', onDocCloseClick);
 
 renderMainTimeline();
+//renderMonthMap();
 renderYearMap();
 
 function renderMainTimeline() {
@@ -1931,6 +1935,65 @@ function renderYearMap() {
   newBars.on('click', onYearClick);
 }
 
+function renderMonthMap(year) {
+  var occsByMonth = groupOccsByMonth(occsByYear[year]);
+  var monthWidthScale = d3
+    .scaleLinear()
+    .domain([
+      0,
+      Object.values(occsByMonth).reduce(
+        (maxOccs, occs) => (occs.length > maxOccs ? occs.length : maxOccs),
+        0
+      ),
+    ])
+    .range([0, maxBarLength]);
+
+  monthContainer.attr('height', 12 * monthHeight).attr('width', maxBarLength);
+
+  var months = monthContainer
+    .select('.timeline-layer')
+    .selectAll('.month')
+    .data(Object.keys(occsByMonth), (x) => x);
+
+  months.exit().remove();
+
+  var newMonths = months.enter().append('g').classed('month', true);
+
+  newMonths.append('rect').classed('bar', true).attr('height', monthHeight);
+  newMonths
+    .append('text')
+    .text((month) => month)
+    .attr('x', 5)
+    .attr('y', '1em');
+  newMonths
+    .append('text')
+    .attr('x', 5)
+    .attr('y', '2em')
+    .classed('doc-count', true);
+  newMonths.attr(
+    'transform',
+    (month) => `translate(0, ${monthHeight * month})`
+  );
+  newMonths.on('click', onMonthClick);
+
+  var currentMonths = months.merge(newMonths);
+  currentMonths
+    .select('.bar')
+    .attr('width', (month) => monthWidthScale(occsByMonth[month].length));
+  currentMonths
+    .select('.doc-count')
+    .text((month) => `${occsByMonth[month].length} documents`);
+
+  function onMonthClick(e, month) {
+    var sortedOccs = occsByMonth[month];
+    if (!sortedOccs || sortedOccs.length < 1) {
+      return;
+    }
+
+    scrollOccurrenceIntoView(sortedOccs[0]);
+  }
+}
+
 function getTransformForTick(occ) {
   const y = timeScale(getDateTimeFromTitle(occ.entity.title));
   return `translate(0, ${y})`;
@@ -1951,7 +2014,7 @@ function makeOccId(occ) {
 }
 
 function onTickClick(e, occ) {
-  docContainerSel.attr(
+  docFrameSel.attr(
     'src',
     `https://embed.documentcloud.org/documents/${occ.document.id}/?embed=1&amp;responsive=1&amp;title=1`
   );
@@ -1966,6 +2029,7 @@ function onYearClick(e, year) {
   }
 
   scrollOccurrenceIntoView(sortedOccs[0]);
+  renderMonthMap(year);
 }
 
 function onYearMapToggleClick() {
@@ -1992,4 +2056,21 @@ function setUpZoom() {
 
 function scrollOccurrenceIntoView(occ) {
   document.getElementById(makeOccId(occ)).scrollIntoView();
+}
+
+function groupOccsByMonth(occs) {
+  var occsByMonth = {};
+  occs.forEach(putInMonthDict);
+  return occsByMonth;
+
+  function putInMonthDict(occ) {
+    const month = new Date(occ.entity.date).getMonth();
+    var occsForMonth = occsByMonth[month];
+    if (!occsForMonth) {
+      occsForMonth = [];
+      occsByMonth[month] = occsForMonth;
+    }
+    occsForMonth.push(occ);
+    occsForMonth.sort((a, b) => (a.entity.date < b.entity.date ? -1 : 1));
+  }
 }
