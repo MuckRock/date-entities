@@ -1803,45 +1803,52 @@ var occs = [
 
 /* global d3 */
 
-const timelineLength = occs.length * 50;
-const maxBarLength = 200;
+// Constants
 const yearHeight = 64;
 const monthHeight = 64;
+const dayHeight = 64;
+const timelineLength = (occs.length + 1) * dayHeight;
+const maxBarLength = 200;
 const startTime = getDateTimeFromTitle(occs[0].entity.title);
 const endTime = getDateTimeFromTitle(occs[occs.length - 1].entity.title);
 
+// State
 var occsByYear = {};
 var mostOccsInAYear = 0;
-
-occs.forEach(putInYearDict);
-var sortedOccs = Object.keys(occsByYear).sort();
-if (sortedOccs.length < 1) {
-  throw new Error('No years found in data.');
-}
-
+var sortedOccs = populateOccsDict();
 const lastYear = sortedOccs[sortedOccs.length - 1];
 const firstYear = sortedOccs[0];
 
-// Side effect: Updates mostOccsInAYear.
-function putInYearDict(occ) {
-  const year = new Date(occ.entity.date).getFullYear();
-  var occsForYear = occsByYear[year];
-  if (!occsForYear) {
-    occsForYear = [];
-    occsByYear[year] = occsForYear;
+function populateOccsDict() {
+  occs.forEach(putInYearDict);
+  var sortedOccs = Object.keys(occsByYear).sort();
+  if (sortedOccs.length < 1) {
+    throw new Error('No years found in data.');
   }
-  occsForYear.push(occ);
-  occsForYear.sort((a, b) => (a.entity.date < b.entity.date ? -1 : 1));
+  return sortedOccs;
 
-  if (occsForYear.length > mostOccsInAYear) {
-    mostOccsInAYear = occsForYear.length;
+  // Side effect: Updates mostOccsInAYear.
+  function putInYearDict(occ) {
+    const year = new Date(occ.entity.date).getFullYear();
+    var occsForYear = occsByYear[year];
+    if (!occsForYear) {
+      occsForYear = [];
+      occsByYear[year] = occsForYear;
+    }
+    occsForYear.push(occ);
+    occsForYear.sort((a, b) => (a.entity.date < b.entity.date ? -1 : 1));
+
+    if (occsForYear.length > mostOccsInAYear) {
+      mostOccsInAYear = occsForYear.length;
+    }
   }
 }
 
+// Scales
 var timeScale = d3
   .scaleLinear()
   .domain([startTime, endTime])
-  .range([0, timelineLength]);
+  .range([dayHeight / 2, timelineLength]);
 
 var yearWidthScale = d3
   .scaleLinear()
@@ -1853,7 +1860,7 @@ var yearYScale = d3
   .domain([firstYear, lastYear])
   .range([0, yearHeight * (lastYear - firstYear)]);
 
-document.getElementById('canvas').setAttribute('height', timelineLength);
+// Selections
 var docContainerSel = d3.select('.doc-container');
 var docFrameSel = d3.select('#doc-frame');
 var yearMapSel = d3.select('.year-map');
@@ -1861,18 +1868,22 @@ var yearMapToggleSel = d3.select('#year-map-toggle-button');
 var docCloseSel = d3.select('#doc-close-button');
 var monthContainer = d3.select('.month-map');
 
-setUpZoom();
 
+// Handlers
 yearMapToggleSel.on('click', onYearMapToggleClick);
 docCloseSel.on('click', onDocCloseClick);
 
+// Init
 renderMainTimeline();
-//renderMonthMap();
+renderMonthMap(firstYear);
 renderYearMap();
 
 function renderMainTimeline() {
-  var newTicks = d3
-    .select('.main-timeline-container .timeline-layer')
+  var dayContainer = d3.select('.day-map');
+  dayContainer.attr('height', timelineLength);
+
+  var newTicks = dayContainer
+    .select('.timeline-layer')
     .selectAll('.tick')
     .data(occs, makeOccId)
     .enter()
@@ -2041,17 +2052,6 @@ function onYearMapToggleClick() {
 
 function onDocCloseClick() {
   docContainerSel.classed('hidden', true);
-}
-
-function setUpZoom() {
-  //var zoomLayer = yearMapSel.select('#zoom-layer');
-  var zoom = d3.zoom().scaleExtent([0.125, 8]).on('zoom', zoomed);
-  yearMapSel.call(zoom);
-
-  function zoomed(zoomEvent) {
-    //zoomLayer.attr('transform', zoomEvent.transform);
-    console.log('zoomEvent', zoomEvent);
-  }
 }
 
 function scrollOccurrenceIntoView(occ) {

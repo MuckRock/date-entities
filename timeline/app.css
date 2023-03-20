@@ -2,6 +2,7 @@
   --darkened: hsla(0, 0%, 0%, 0.8);
   --border-style: 2px solid var(--darkened);
   --border-rad: 2px;
+  --control-margin: 8px;
 }
 
 body {
@@ -15,20 +16,6 @@ body {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: start;
-}
-
-#canvas {
-  margin-left: 10em;
-  overflow-y: scroll;
-}
-
-#doc-frame {
-  position: fixed;
-  right: 0;
-  top: 0;
-  border: var(--border-style);
-  border-radius: var(--border-rad);
-  height: calc(100vh - 100px);
 }
 
 .invisible {
@@ -47,14 +34,16 @@ ul {
 }
 
 button {
-  font-size: 1.2em;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
   cursor: pointer;
-  padding: 0.5em;
-  border-radius: 0.5em;
-  border-width: 8px;
+  padding: 4px;
+  border-radius: 4px;
+  border-width: 2px;
   border-color: #333;
   border-style: solid;
   background-color: #fff;
+  width: 10em;
   min-width: 44px;
 }
 
@@ -69,14 +58,6 @@ a:link {
 
 a:visited {
   color: #ddd;
-}
-
-#version-info {
-  position: absolute;
-  right: 1.5em;
-  top: 1.5em;
-  font-size: 0.5em;
-  color: #666;
 }
 
 .hidden {
@@ -96,17 +77,23 @@ line {
 
 .title {
   margin-top: 0;
+  margin-bottom: 4px;
+}
+
+.map-container {
+  position: sticky;
+  top: 0;
+  overflow-y: scroll;
 }
 
 .high-level-map {
-  position: sticky;
-  top: 30px;
   border: var(--border-style);
   border-radius: var(--border-rad);
   background-color: white;
 }
 
-.year,.month {
+.year,
+.month {
   cursor: pointer;
 }
 
@@ -115,8 +102,12 @@ line {
   fill: hsl(210, 70%, 80%);
 }
 
-.high-level-map > text {
+.high-level-map>text {
   fill: var(--darkened);
+}
+
+.day-map {
+  margin-top: 30px;
 }
 
 .timelines-container {
@@ -127,8 +118,8 @@ line {
 
 .control-pane {
   position: fixed;
-  bottom: 8px;
-  left: 8px;
+  bottom: var(--control-margin);
+  left: var(--control-margin);
   width: 10em;
   display: flex;
   flex-direction: column;
@@ -141,15 +132,15 @@ line {
 
 #doc-close-button {
   position: fixed;
-  bottom: 0;
+  bottom: var(--control-margin);
+  right: var(--control-margin);
 }
 
-#doc-frame: {
-  height: 90vh;
-}
-
-@media all and (max-height: 568px) {
-  body {
-    font-size: 18px;
-  }
+#doc-frame {
+  position: fixed;
+  right: 0;
+  top: 0;
+  border: var(--border-style);
+  border-radius: var(--border-rad);
+  height: calc(100vh - 100px);
 }
