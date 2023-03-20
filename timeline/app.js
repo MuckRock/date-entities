@@ -1811,7 +1811,20 @@ const timelineLength = (occs.length + 1) * dayHeight;
 const maxBarLength = 200;
 const startTime = getDateTimeFromTitle(occs[0].entity.title);
 const endTime = getDateTimeFromTitle(occs[occs.length - 1].entity.title);
-
+var englishMonthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 // State
 var occsByYear = {};
 var mostOccsInAYear = 0;
@@ -1863,14 +1876,16 @@ var yearYScale = d3
 // Selections
 var docContainerSel = d3.select('.doc-container');
 var docFrameSel = d3.select('#doc-frame');
-var yearMapSel = d3.select('.year-map');
+var yearMapContainerSel = d3.select('.year-map-container');
+var monthMapContainerSel = d3.select('.month-map-container');
 var yearMapToggleSel = d3.select('#year-map-toggle-button');
+var monthMapToggleSel = d3.select('#month-map-toggle-button');
 var docCloseSel = d3.select('#doc-close-button');
 var monthContainer = d3.select('.month-map');
 
-
 // Handlers
 yearMapToggleSel.on('click', onYearMapToggleClick);
+monthMapToggleSel.on('click', onMonthMapToggleClick);
 docCloseSel.on('click', onDocCloseClick);
 
 // Init
@@ -1973,7 +1988,7 @@ function renderMonthMap(year) {
   newMonths.append('rect').classed('bar', true).attr('height', monthHeight);
   newMonths
     .append('text')
-    .text((month) => month)
+    .text((month) => englishMonthNames[month])
     .attr('x', 5)
     .attr('y', '1em');
   newMonths
@@ -2044,9 +2059,19 @@ function onYearClick(e, year) {
 }
 
 function onYearMapToggleClick() {
-  yearMapSel.classed('hidden', !yearMapSel.classed('hidden'));
+  yearMapContainerSel.classed('hidden', !yearMapContainerSel.classed('hidden'));
   yearMapToggleSel.text(
-    yearMapSel.classed('hidden') ? 'Show year map' : 'Hide year map'
+    yearMapContainerSel.classed('hidden') ? 'Show year map' : 'Hide year map'
+  );
+}
+
+function onMonthMapToggleClick() {
+  monthMapContainerSel.classed(
+    'hidden',
+    !monthMapContainerSel.classed('hidden')
+  );
+  monthMapToggleSel.text(
+    monthMapContainerSel.classed('hidden') ? 'Show month map' : 'Hide month map'
   );
 }
 
