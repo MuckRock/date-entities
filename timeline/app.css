@@ -87,19 +87,24 @@ line {
 }
 
 .high-level-map {
-  border: var(--border-style);
-  border-radius: var(--border-rad);
+  border-left: var(--border-style);
+  border-right: var(--border-style);
   background-color: white;
 }
 
-.year,
-.month {
+.time-unit {
   cursor: pointer;
+  position: absolute;
+  border: 1px solid var(--darkened);
+}
+
+.time-unit h4 {
+  margin: 0;
 }
 
 .bar {
-  stroke: var(--darkened);
-  fill: hsl(210, 70%, 80%);
+  background-color: hsl(210, 70%, 80%);
+  height: 8px;
 }
 
 .high-level-map>text {

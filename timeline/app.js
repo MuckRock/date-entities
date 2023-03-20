@@ -1925,7 +1925,7 @@ function renderYearMap() {
     .data(Object.keys(occsByYear), (x) => x)
     .enter()
     .append('g')
-    .classed('year', true);
+    .classed('year', true).classed('time-unit', true);
 
   newBars
     .append('rect')
@@ -1959,38 +1959,39 @@ function renderMonthMap(year) {
     ])
     .range([0, maxBarLength]);
 
-  monthContainer.attr('height', 12 * monthHeight).attr('width', maxBarLength);
+  monthContainer
+    .style('height', 12 * monthHeight + 'px')
+    .style('width', maxBarLength + 'px');
 
   var months = monthContainer
-    .select('.timeline-layer')
     .selectAll('.month')
     .data(Object.keys(occsByMonth), (x) => x);
 
   months.exit().remove();
 
-  var newMonths = months.enter().append('g').classed('month', true);
+  var newMonths = months.enter().append('div').classed('month', true).classed('time-unit', true);;
 
-  newMonths.append('rect').classed('bar', true).attr('height', monthHeight);
   newMonths
-    .append('text')
+    .append('h4')
     .text((month) => month)
     .attr('x', 5)
     .attr('y', '1em');
   newMonths
-    .append('text')
+    .append('span')
     .attr('x', 5)
     .attr('y', '2em')
     .classed('doc-count', true);
-  newMonths.attr(
-    'transform',
-    (month) => `translate(0, ${monthHeight * month})`
+  newMonths.append('div').classed('bar', true);
+  newMonths.style(
+    'top',
+    (month) => `${monthHeight * month}px`
   );
   newMonths.on('click', onMonthClick);
 
   var currentMonths = months.merge(newMonths);
   currentMonths
     .select('.bar')
-    .attr('width', (month) => monthWidthScale(occsByMonth[month].length));
+    .style('width', (month) => monthWidthScale(occsByMonth[month].length) + 'px');
   currentMonths
     .select('.doc-count')
     .text((month) => `${occsByMonth[month].length} documents`);
