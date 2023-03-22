@@ -29,10 +29,6 @@ body {
   text-shadow: none;
 }
 
-ul {
-  list-style-type: none;
-}
-
 button {
   font-family: Helvetica, sans-serif;
   font-size: 14px;
@@ -144,4 +140,14 @@ line {
   border: var(--border-style);
   border-radius: var(--border-rad);
   height: calc(100vh - 100px);
+}
+
+.date-docs-container ul {
+  background-color: white;
+  border: var(--border-style);
+  border-radius: var(--border-rad);
+}
+
+.date-docs-container ul li {
+  cursor: pointer;
 }

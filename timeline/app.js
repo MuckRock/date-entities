@@ -1825,8 +1825,10 @@ var englishMonthNames = [
   'November',
   'December',
 ];
+
 // State
 var occsByYear = {};
+var dayGroupsByDay = {};
 var mostOccsInAYear = 0;
 var sortedOccs = populateOccsDict();
 const lastYear = sortedOccs[sortedOccs.length - 1];
@@ -1834,10 +1836,12 @@ const firstYear = sortedOccs[0];
 
 function populateOccsDict() {
   occs.forEach(putInYearDict);
+  occs.forEach(putInDayGroup);
   var sortedOccs = Object.keys(occsByYear).sort();
   if (sortedOccs.length < 1) {
     throw new Error('No years found in data.');
   }
+
   return sortedOccs;
 
   // Side effect: Updates mostOccsInAYear.
@@ -1854,6 +1858,17 @@ function populateOccsDict() {
     if (occsForYear.length > mostOccsInAYear) {
       mostOccsInAYear = occsForYear.length;
     }
+  }
+
+  function putInDayGroup(occ) {
+    const day = new Date(occ.entity.date).toISOString();
+    var dayGroup = dayGroupsByDay[day];
+    if (!dayGroup) {
+      dayGroup = { day, occs: [] };
+      dayGroupsByDay[day] = dayGroup;
+    }
+    dayGroup.occs.push(occ);
+    dayGroup.occs.sort();
   }
 }
 
@@ -1900,11 +1915,11 @@ function renderMainTimeline() {
   var newTicks = dayContainer
     .select('.timeline-layer')
     .selectAll('.tick')
-    .data(occs, makeOccId)
+    .data(Object.keys(dayGroupsByDay), (day) => day)
     .enter()
     .append('g')
     .classed('tick', true)
-    .attr('id', makeOccId);
+    .attr('id', (day) => day);
 
   newTicks
     .append('line')
@@ -1915,7 +1930,7 @@ function renderMainTimeline() {
     .attr('y2', 0);
   newTicks
     .append('text')
-    .text((occ) => occ.entity.title)
+    .text((day) => dayGroupsByDay[day].occs[0].entity.title)
     .attr('x', 54)
     .attr('y', '0.3em');
   newTicks
@@ -1923,8 +1938,29 @@ function renderMainTimeline() {
     .attr('href', '#doc-icon-def')
     .attr('x', 320 - 24 - 10)
     .attr('y', -32 / 2);
+
   newTicks.attr('transform', getTransformForTick);
   newTicks.on('click', onTickClick);
+
+  d3.select('.doc-lists-layer')
+    .selectAll('.date-docs-container')
+    .data(Object.keys(dayGroupsByDay), (day) => day)
+    .enter()
+    .append('foreignObject')
+    .classed('date-docs-container', true)
+    .classed('hidden', true)
+    .attr('id', getIdForDate)
+    .attr('y', getYForDay)
+    .attr('width', 200)
+    .attr('height', 200)
+    .append('xhtml:div')
+    .append('xhtml:ul')
+    .selectAll('li')
+    .data((day) => dayGroupsByDay[day].occs)
+    .enter()
+    .append('li')
+    .text((occ) => occ.document.title)
+    .on('click', onDocItemClick);
 }
 
 function renderYearMap() {
@@ -2020,9 +2056,13 @@ function renderMonthMap(year) {
   }
 }
 
-function getTransformForTick(occ) {
-  const y = timeScale(getDateTimeFromTitle(occ.entity.title));
-  return `translate(0, ${y})`;
+function getTransformForTick(day) {
+  return `translate(0, ${getYForDay(day)})`;
+}
+
+function getYForDay(day) {
+  var occ = dayGroupsByDay[day].occs[0];
+  return timeScale(getDateTimeFromTitle(occ.entity.title));
 }
 
 function getTransformForYear(year) {
@@ -2039,13 +2079,18 @@ function makeOccId(occ) {
   return occ.document.id + '-' + occ.entity.id;
 }
 
-function onTickClick(e, occ) {
+function onDocItemClick(e, occ) {
   docFrameSel.attr(
     'src',
     `https://embed.documentcloud.org/documents/${occ.document.id}/?embed=1&amp;responsive=1&amp;title=1`
   );
   docContainerSel.attr('title', occ.document.title);
   docContainerSel.classed('hidden', false);
+}
+
+function onTickClick(e, day) {
+  d3.selectAll('.date-docs-container').classed('hidden', true);
+  d3.select(`#${getIdForDate(day)}`).classed('hidden', false);
 }
 
 function onYearClick(e, year) {
@@ -2098,4 +2143,8 @@ function groupOccsByMonth(occs) {
     occsForMonth.push(occ);
     occsForMonth.sort((a, b) => (a.entity.date < b.entity.date ? -1 : 1));
   }
+}
+
+function getIdForDate(dateString) {
+  return 'docs-container-' + dateString.slice(0, 10);
 }
