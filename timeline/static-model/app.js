@@ -1915,11 +1915,11 @@ function renderMainTimeline() {
   var newTicks = dayContainer
     .select('.timeline-layer')
     .selectAll('.tick')
-    .data(Object.keys(dayGroupsByDay), (day) => day)
+    .data(Object.keys(dayGroupsByDay), getIdForDate)
     .enter()
     .append('g')
     .classed('tick', true)
-    .attr('id', (day) => day);
+    .attr('id', getIdForDate);
 
   newTicks
     .append('line')
@@ -1949,7 +1949,7 @@ function renderMainTimeline() {
     .append('foreignObject')
     .classed('date-docs-container', true)
     .classed('hidden', true)
-    .attr('id', getIdForDate)
+    .attr('id', date => 'doc-list-' + getIdForDate(date))
     .attr('y', getYForDay)
     .attr('width', 200)
     .attr('height', 200)
@@ -2090,7 +2090,7 @@ function onDocItemClick(e, occ) {
 
 function onTickClick(e, day) {
   d3.selectAll('.date-docs-container').classed('hidden', true);
-  d3.select(`#${getIdForDate(day)}`).classed('hidden', false);
+  d3.select(`#doc-list-${getIdForDate(day)}`).classed('hidden', false);
 }
 
 function onYearClick(e, year) {
@@ -2125,7 +2125,7 @@ function onDocCloseClick() {
 }
 
 function scrollOccurrenceIntoView(occ) {
-  document.getElementById(makeOccId(occ)).scrollIntoView();
+  document.getElementById(getIdForDate(occ.entity.date)).scrollIntoView();
 }
 
 function groupOccsByMonth(occs) {

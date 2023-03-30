@@ -1,4 +1,5 @@
 wheel
-python-documentcloud==3.0.4
+python-documentcloud==3.3.9
 requests
 datefinder
+python-dotenv

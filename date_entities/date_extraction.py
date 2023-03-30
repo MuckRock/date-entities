@@ -2,10 +2,6 @@ from logging import Logger
 import datefinder
 import requests
 
-
-logger = Logger("get_date_entities")
-
-
 def get_wikidata_id(datetime):
     # TODO: Local cache.
     date_string = datetime.date().isoformat()
@@ -23,7 +19,7 @@ def get_wikidata_id(datetime):
 
 
 def get_wikipedia_dates(text):
-    dates = datefinder.find_dates(text)
+    dates = datefinder.find_dates(text, index=True)
     # TODO: Also get locations within text? Undo the deduping if we do that.
     dates = list(set(dates))
     return list(
