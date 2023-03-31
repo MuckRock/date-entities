@@ -5095,6 +5095,7 @@ docCloseSel.on('click', onDocCloseClick);
 renderMainTimeline();
 renderMonthMap(firstYear);
 renderYearMap();
+addZoom();
 
 function renderMainTimeline() {
   var dayContainer = d3.select('.day-map');
@@ -5241,6 +5242,17 @@ function renderMonthMap(year) {
     }
 
     scrollOccurrenceIntoView(sortedOccs[0]);
+  }
+}
+
+function addZoom() {
+  var board = d3.select('.year-map');
+  var zoomLayer = board.select('.zoom-root');
+  var zoom = d3.zoom().scaleExtent([0.125, 8]).on('zoom', zoomed);
+  board.call(zoom);
+
+  function zoomed(zoomEvent) {
+    zoomLayer.attr('transform', zoomEvent.transform);
   }
 }
 
