@@ -4991,14 +4991,22 @@ occs = [
 /* global d3 */
 
 // Constants
+// TODO: Custom scrollbar?
 const yearHeight = 64;
 const monthHeight = 64;
 const dayHeight = 64;
-const timelineLength = (occs.length + 1) * dayHeight;
 const maxBarLength = 200;
+// If you set the height of an SVG to 25798461, it won't render on Firefox.
+const maxElementHeight = 25000000;
 occs.sort(compareOccDates);
 const startTime = getDateTimeFromEntity(occs[0].entity);
 const endTime = getDateTimeFromEntity(occs[occs.length - 1].entity);
+const spanInDays = (endTime - startTime) / 1000 / 60 / 60 / 24;
+var timelineLength = spanInDays * dayHeight;
+if (timelineLength > maxElementHeight) {
+  timelineLength = maxElementHeight;
+}
+
 var englishMonthNames = [
   'January',
   'February',
@@ -5248,11 +5256,11 @@ function renderMonthMap(year) {
 function addZoom() {
   var board = d3.select('.year-map');
   var zoomLayer = board.select('.zoom-root');
-  var zoom = d3.zoom().scaleExtent([0.125, 8]).on('zoom', zoomed);
+  var zoom = d3.zoom().scaleExtent([1 / 32, 8]).on('zoom', zoomed);
   board.call(zoom);
 
   function zoomed(zoomEvent) {
-    zoomLayer.attr('transform', zoomEvent.transform);
+    zoomLayer.attr('transform', `translate(0, ${zoomEvent.transform.y}) scale(${zoomEvent.transform.k})`);
   }
 }
 

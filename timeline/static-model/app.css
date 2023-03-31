@@ -121,6 +121,7 @@ line {
   display: flex;
   flex-direction: column;
   z-index: 1;
+  font-size: 12px;
 }
 
 .doc-container {
