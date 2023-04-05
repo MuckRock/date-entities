@@ -4993,19 +4993,19 @@ occs = [
 // Constants
 // TODO: Custom scrollbar?
 const yearHeight = 64;
-const monthHeight = 64;
+const monthHeight =
+  (window.innerHeight -
+    document
+      .querySelector('.month-map-container .title')
+      .getBoundingClientRect().height) /
+  12;
 const dayHeight = 64;
 const maxBarLength = 200;
-// If you set the height of an SVG to 25798461, it won't render on Firefox.
-const maxElementHeight = 25000000;
 occs.sort(compareOccDates);
 const startTime = getDateTimeFromEntity(occs[0].entity);
 const endTime = getDateTimeFromEntity(occs[occs.length - 1].entity);
 const spanInDays = (endTime - startTime) / 1000 / 60 / 60 / 24;
-var timelineLength = spanInDays * dayHeight;
-if (timelineLength > maxElementHeight) {
-  timelineLength = maxElementHeight;
-}
+const dayTimelineHeight = 365 * dayHeight;
 
 var englishMonthNames = [
   'January',
@@ -5024,10 +5024,9 @@ var englishMonthNames = [
 
 // State
 var occsByYear = {};
-var dayGroupsByDay = {};
+var dayGroupsByDateStringByYear = {};
 var mostOccsInAYear = 0;
 var sortedOccs = populateOccsDict();
-const lastYear = sortedOccs[sortedOccs.length - 1];
 const firstYear = sortedOccs[0];
 
 function populateOccsDict() {
@@ -5054,14 +5053,21 @@ function populateOccsDict() {
     if (occsForYear.length > mostOccsInAYear) {
       mostOccsInAYear = occsForYear.length;
     }
+
+    var dayGroupsForYear = dayGroupsByDateStringByYear[year];
+    if (!dayGroupsForYear) {
+      dayGroupsForYear = {};
+      dayGroupsByDateStringByYear[year] = dayGroupsForYear;
+    }
+    putInDayGroup(occ, dayGroupsForYear);
   }
 
-  function putInDayGroup(occ) {
-    const day = new Date(occ.entity.date).toISOString();
-    var dayGroup = dayGroupsByDay[day];
+  function putInDayGroup(occ, dayGroupsForYear) {
+    const dateString = new Date(occ.entity.date).toISOString();
+    var dayGroup = dayGroupsForYear[dateString];
     if (!dayGroup) {
-      dayGroup = { day, occs: [] };
-      dayGroupsByDay[day] = dayGroup;
+      dayGroup = { day: dateString, occs: [] };
+      dayGroupsForYear[dateString] = dayGroup;
     }
     dayGroup.occs.push(occ);
     dayGroup.occs.sort();
@@ -5072,17 +5078,12 @@ function populateOccsDict() {
 var timeScale = d3
   .scaleLinear()
   .domain([startTime, endTime])
-  .range([dayHeight / 2, timelineLength]);
+  .range([dayHeight / 2, dayTimelineHeight]);
 
 var yearWidthScale = d3
   .scaleLinear()
   .domain([0, mostOccsInAYear])
   .range([0, maxBarLength]);
-
-var yearYScale = d3
-  .scaleLinear()
-  .domain([firstYear, lastYear])
-  .range([0, yearHeight * (lastYear - firstYear)]);
 
 // Selections
 var docContainerSel = d3.select('.doc-container');
@@ -5093,6 +5094,7 @@ var yearMapToggleSel = d3.select('#year-map-toggle-button');
 var monthMapToggleSel = d3.select('#month-map-toggle-button');
 var docCloseSel = d3.select('#doc-close-button');
 var monthContainer = d3.select('.month-map');
+var dayContainer = d3.select('.day-map');
 
 // Handlers
 yearMapToggleSel.on('click', onYearMapToggleClick);
@@ -5100,23 +5102,26 @@ monthMapToggleSel.on('click', onMonthMapToggleClick);
 docCloseSel.on('click', onDocCloseClick);
 
 // Init
-renderMainTimeline();
+dayContainer.attr('height', dayTimelineHeight);
+renderDayTimeline(firstYear);
 renderMonthMap(firstYear);
 renderYearMap();
-addZoom();
+// addZoom();
 
-function renderMainTimeline() {
-  var dayContainer = d3.select('.day-map');
-  dayContainer.attr('height', timelineLength);
+function renderDayTimeline(year) {
+  var dayGroupsByDateString = dayGroupsByDateStringByYear[year];
 
-  var newTicks = dayContainer
+  var ticks = dayContainer
     .select('.timeline-layer')
     .selectAll('.tick')
-    .data(Object.keys(dayGroupsByDay), getIdForDate)
+    .data(Object.keys(dayGroupsByDateString), getIdForDate);
+
+  ticks.exit().remove();
+
+  var newTicks = ticks
     .enter()
     .append('g')
     .classed('tick', true)
-    .attr('id', getIdForDate);
 
   newTicks
     .append('line')
@@ -5127,7 +5132,9 @@ function renderMainTimeline() {
     .attr('y2', 0);
   newTicks
     .append('text')
-    .text((day) => dayGroupsByDay[day].occs[0].entity.title)
+    .text(
+      (dateString) => dayGroupsByDateString[dateString].occs[0].entity.title
+    )
     .attr('x', 54)
     .attr('y', '0.3em');
   newTicks
@@ -5136,24 +5143,27 @@ function renderMainTimeline() {
     .attr('x', 320 - 24 - 10)
     .attr('y', -32 / 2);
 
-  newTicks.attr('transform', getTransformForTick);
   newTicks.on('click', onTickClick);
+
+  newTicks.merge(ticks)
+    .attr('id', getIdForDate)
+    .attr('transform', getTransformForTick);
 
   d3.select('.doc-lists-layer')
     .selectAll('.date-docs-container')
-    .data(Object.keys(dayGroupsByDay), (day) => day)
+    .data(Object.keys(dayGroupsByDateString), (day) => day)
     .enter()
     .append('foreignObject')
     .classed('date-docs-container', true)
     .classed('hidden', true)
     .attr('id', (date) => 'doc-list-' + getIdForDate(date))
-    .attr('y', getYForDay)
+    .attr('y', getYForDate)
     .attr('width', 200)
     .attr('height', 200)
     .append('xhtml:div')
     .append('xhtml:ul')
     .selectAll('li')
-    .data((day) => dayGroupsByDay[day].occs)
+    .data((day) => dayGroupsByDateString[day].occs)
     .enter()
     .append('li')
     .text((occ) => occ.document.title)
@@ -5164,7 +5174,7 @@ function renderYearMap() {
   var yearContainer = d3.select('.year-map');
 
   yearContainer
-    .attr('height', yearYScale(sortedOccs[sortedOccs.length - 1]) + yearHeight)
+    .attr('height', sortedOccs.length * yearHeight)
     .attr('width', maxBarLength);
 
   var newBars = yearContainer
@@ -5253,28 +5263,18 @@ function renderMonthMap(year) {
   }
 }
 
-function addZoom() {
-  var board = d3.select('.year-map');
-  var zoomLayer = board.select('.zoom-root');
-  var zoom = d3.zoom().scaleExtent([1 / 32, 8]).on('zoom', zoomed);
-  board.call(zoom);
-
-  function zoomed(zoomEvent) {
-    zoomLayer.attr('transform', `translate(0, ${zoomEvent.transform.y}) scale(${zoomEvent.transform.k})`);
-  }
+function getTransformForTick(dateString) {
+  return `translate(0, ${getYForDate(dateString)})`;
 }
 
-function getTransformForTick(day) {
-  return `translate(0, ${getYForDay(day)})`;
-}
-
-function getYForDay(day) {
-  var occ = dayGroupsByDay[day].occs[0];
+function getYForDate(dateString) {
+  const year = new Date(dateString).getFullYear();
+  var occ = dayGroupsByDateStringByYear[year][dateString].occs[0];
   return timeScale(getDateTimeFromEntity(occ.entity));
 }
 
-function getTransformForYear(year) {
-  const y = yearYScale(year);
+function getTransformForYear(year, i) {
+  const y = i * yearHeight;
   return `translate(0, ${y})`;
 }
 
@@ -5303,8 +5303,9 @@ function onYearClick(e, year) {
     return;
   }
 
-  scrollOccurrenceIntoView(sortedOccs[0]);
   renderMonthMap(year);
+  renderDayTimeline(year);
+  scrollOccurrenceIntoView(sortedOccs[0]);
 }
 
 function onYearMapToggleClick() {

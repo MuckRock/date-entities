@@ -6,7 +6,7 @@
 }
 
 body {
-  font-size: 24px;
+  font-size: 18px;
   font-family: Helvetica, sans-serif;
   background: #fff;
   color: #333;
@@ -116,7 +116,7 @@ line {
 .control-pane {
   position: fixed;
   bottom: var(--control-margin);
-  left: var(--control-margin);
+  right: var(--control-margin);
   width: 10em;
   display: flex;
   flex-direction: column;
