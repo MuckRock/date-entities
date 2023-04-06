@@ -5002,9 +5002,6 @@ const monthHeight =
 const dayHeight = 64;
 const maxBarLength = 200;
 occs.sort(compareOccDates);
-const startTime = getDateTimeFromEntity(occs[0].entity);
-const endTime = getDateTimeFromEntity(occs[occs.length - 1].entity);
-const spanInDays = (endTime - startTime) / 1000 / 60 / 60 / 24;
 const dayTimelineHeight = 365 * dayHeight;
 
 var englishMonthNames = [
@@ -5075,11 +5072,6 @@ function populateOccsDict() {
 }
 
 // Scales
-var timeScale = d3
-  .scaleLinear()
-  .domain([startTime, endTime])
-  .range([dayHeight / 2, dayTimelineHeight]);
-
 var yearWidthScale = d3
   .scaleLinear()
   .domain([0, mostOccsInAYear])
@@ -5095,6 +5087,7 @@ var monthMapToggleSel = d3.select('#month-map-toggle-button');
 var docCloseSel = d3.select('#doc-close-button');
 var monthContainer = d3.select('.month-map');
 var dayContainer = d3.select('.day-map');
+var dayTimeline = dayContainer.select('.timeline-layer');
 
 // Handlers
 yearMapToggleSel.on('click', onYearMapToggleClick);
@@ -5111,21 +5104,17 @@ renderYearMap();
 function renderDayTimeline(year) {
   var dayGroupsByDateString = dayGroupsByDateStringByYear[year];
 
-  var ticks = dayContainer
-    .select('.timeline-layer')
+  var ticks = dayTimeline
     .selectAll('.tick')
     .data(Object.keys(dayGroupsByDateString), getIdForDate);
 
   ticks.exit().remove();
 
-  var newTicks = ticks
-    .enter()
-    .append('g')
-    .classed('tick', true)
+  var newTicks = ticks.enter().append('g').classed('tick', true);
 
   newTicks
     .append('line')
-    .classed('tick', true)
+    .classed('tick-line', true)
     .attr('x1', 0)
     .attr('x2', 50)
     .attr('y1', 0)
@@ -5145,7 +5134,8 @@ function renderDayTimeline(year) {
 
   newTicks.on('click', onTickClick);
 
-  newTicks.merge(ticks)
+  newTicks
+    .merge(ticks)
     .attr('id', getIdForDate)
     .attr('transform', getTransformForTick);
 
@@ -5157,7 +5147,7 @@ function renderDayTimeline(year) {
     .classed('date-docs-container', true)
     .classed('hidden', true)
     .attr('id', (date) => 'doc-list-' + getIdForDate(date))
-    .attr('y', getYForDate)
+    .attr('y', getYWithinYearForDate)
     .attr('width', 200)
     .attr('height', 200)
     .append('xhtml:div')
@@ -5243,7 +5233,6 @@ function renderMonthMap(year) {
     'transform',
     (month) => `translate(0, ${monthHeight * month})`
   );
-  newMonths.on('click', onMonthClick);
 
   var currentMonths = months.merge(newMonths);
   currentMonths
@@ -5252,6 +5241,9 @@ function renderMonthMap(year) {
   currentMonths
     .select('.doc-count')
     .text((month) => `${occsByMonth[month].length} documents`);
+  // onMonthClick needs to be rebound on every render so that
+  // occsByMonth is correct when the click happens.
+  currentMonths.on('click', onMonthClick);
 
   function onMonthClick(e, month) {
     var sortedOccs = occsByMonth[month];
@@ -5264,23 +5256,21 @@ function renderMonthMap(year) {
 }
 
 function getTransformForTick(dateString) {
-  return `translate(0, ${getYForDate(dateString)})`;
+  return `translate(0, ${getYWithinYearForDate(dateString)})`;
 }
 
-function getYForDate(dateString) {
-  const year = new Date(dateString).getFullYear();
-  var occ = dayGroupsByDateStringByYear[year][dateString].occs[0];
-  return timeScale(getDateTimeFromEntity(occ.entity));
+function getYWithinYearForDate(dateString) {
+  const date = new Date(dateString);
+  const startOfYear = new Date(date.getFullYear(), 0, 1);
+  const daysFromStartOfYear =
+    (date.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24);
+  // The added 0.5 is to keep the first tick from being halfway cut off.
+  return (daysFromStartOfYear + 0.5) * dayHeight;
 }
 
 function getTransformForYear(year, i) {
   const y = i * yearHeight;
   return `translate(0, ${y})`;
-}
-
-function getDateTimeFromEntity(entity) {
-  var date = new Date(entity.date);
-  return date.getTime();
 }
 
 function onDocItemClick(e, occ) {
@@ -5330,7 +5320,8 @@ function onDocCloseClick() {
 }
 
 function scrollOccurrenceIntoView(occ) {
-  document.getElementById(getIdForDate(occ.entity.date)).scrollIntoView();
+  var textSel = d3.select(`#${getIdForDate(occ.entity.date)} text`);
+  textSel.node().scrollIntoView({ behavior: 'smooth' });
 }
 
 function groupOccsByMonth(occs) {
