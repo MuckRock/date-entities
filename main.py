@@ -31,10 +31,11 @@ class DateTimeline(AddOn):
             # print('dates', set(dates))
             if not use_entities:
                 for entry in dates:
-                    if entry[0] < datetime(1500, 1, 1) or entry[0] > datetime(3000, 1, 1):
+                    if entry[0] < datetime(1700, 1, 1) or entry[0] > datetime(2050, 1, 1):
                         continue
                     occs.append({
                         "position": entry[1],
+                        "excerpt": document.full_text[entry[1][0]-20:entry[1][1]+20],
                         "entity": {
                             "id": entity_count,
                             "title": entry[0].strftime("%m/%d/%Y"),

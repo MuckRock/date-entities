@@ -137,10 +137,15 @@ line {
 #doc-frame {
   position: fixed;
   right: 0;
-  top: 0;
+  bottom: 0;
   border: var(--border-style);
   border-radius: var(--border-rad);
   height: calc(100vh - 100px);
+}
+
+.excerpt {
+  position: fixed;
+  top: 0;
 }
 
 .date-docs-container ul {
