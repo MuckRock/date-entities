@@ -1,6 +1,10 @@
+/* global findDates */
+
 const selfURL = "https://api.www.documentcloud.org/api/users/me/";
 const searchURL = "https://api.www.documentcloud.org/api/documents/search?q=*:*&order_by=created_at";
 
+var defaultFetchOpts = { credentials: 'include', mode: 'cors' };
+var entityCount = 0;
 
 // Constants
 // TODO: Custom scrollbar?
@@ -34,21 +38,30 @@ var englishMonthNames = [
 var occsByYear = {};
 var dayGroupsByDateStringByYear = {};
 var mostOccsInAYear = 0;
-var sortedOccs = {};
+var currentYear;
 
-function populateOccsDict(occs) {
-  occs.forEach(putInYearDict);
-  occs.forEach(putInDayGroup);
+function updateStateWithOcc(occ) {
+  if (!occ) {
+    return;
+  }
+  putInYearDict(occ);
   var sortedOccs = Object.keys(occsByYear).sort();
   if (sortedOccs.length < 1) {
     throw new Error('No years found in data.');
   }
 
-  return sortedOccs;
+  useOccs(sortedOccs);
 
-  // Side effect: Updates mostOccsInAYear.
+  // Updates mostOccsInAYear.
   function putInYearDict(occ) {
-    const year = new Date(occ.entity.date).getFullYear();
+    var dateObj;
+    try {
+      dateObj = new Date(occ.entity.date);
+    } catch (error) {
+      console.error('Error while putting occ in year dict', error);
+      return;
+    }
+    const year = dateObj.getFullYear();
     var occsForYear = occsByYear[year];
     if (!occsForYear) {
       occsForYear = [];
@@ -70,7 +83,14 @@ function populateOccsDict(occs) {
   }
 
   function putInDayGroup(occ, dayGroupsForYear) {
-    const dateString = new Date(occ.entity.date).toISOString();
+    var dateObj;
+    try {
+      dateObj = new Date(occ.entity.date);
+    } catch (error) {
+      console.error('Error while putting occ in day group', error);
+      return;
+    }
+    const dateString = dateObj.toISOString();
     var dayGroup = dayGroupsForYear[dateString];
     if (!dayGroup) {
       dayGroup = { day: dateString, occs: [] };
@@ -106,23 +126,47 @@ docCloseSel.on('click', onDocCloseClick);
 
 ((async function init() {
   try {
-    let defaultFetchOpts = { credentials: 'include', mode: 'cors' };
     let res = await fetch(selfURL, defaultFetchOpts);
-    let fetchesComplete = false;
+    let errorHappenedWhileFetching = true;
 
     if (res.ok) {
       var authData = await res.json();
       console.log('authData', authData);
 
-      res = await fetch(searchURL, defaultFetchOpts);
-      if (res.ok) {
-        let searchData = await res.json();
-        console.log(searchData);
-        fetchesComplete = true;
+      let hashParts = window.location.hash.split('=');
+      const projectId = hashParts.length > 1 ? hashParts[1] : undefined;
+      console.log(projectId)
+
+      var nextDocsURL;
+
+      if (projectId) {
+        // const projDocsURL = `https://api.www.documentcloud.org/api/projects/${projectId}/documents/`;
+        nextDocsURL = `https://api.www.documentcloud.org/api/documents/search/?q=+project:${projectId}&version=2.0`;
+      } else {
+        nextDocsURL = searchURL;
       }
+
+      do {
+        res = await fetch(nextDocsURL, defaultFetchOpts);
+        if (res.ok) {
+          let searchData = await res.json();
+          console.log(searchData);
+          if (searchData.results) {
+            let results = searchData.results.map(distillResult);
+            results.forEach(collectOccFromDocResult);
+          }
+          if (searchData.next) {
+            nextDocsURL = searchData.next;
+          } else {
+            nextDocsURL = null;
+          }
+          errorHappenedWhileFetching = false;
+        }
+      } while (nextDocsURL);
     }
-    if (!fetchesComplete) {
-      throw new Error(`Error while authorizing with DocumentCloud: ${error.message}`);
+
+    if (errorHappenedWhileFetching) {
+      throw new Error(`Error while fetching: ${error.message} `);
     }
   } catch (error) {
     handleError(error);
@@ -134,13 +178,13 @@ function handleError(error) {
   console.error(error);
 }
 
-function useOccs(occs) {
-  occs.sort(compareOccDates);
-  var sortedOccs = populateOccsDict();
-  const firstYear = sortedOccs[0];
+function useOccs(sortedOccs) {
+  if (!currentYear) {
+    currentYear = sortedOccs[0];
+  }
   dayContainer.attr('height', dayTimelineHeight);
-  renderDayTimeline(firstYear);
-  renderMonthMap(firstYear);
+  renderDayTimeline(currentYear);
+  renderMonthMap(currentYear);
   renderYearMap(sortedOccs);
 }
 
@@ -210,10 +254,14 @@ function renderYearMap(sortedOccs) {
     .attr('height', sortedOccs.length * yearHeight)
     .attr('width', maxBarLength);
 
-  var newBars = yearContainer
+  var bars = yearContainer
     .select('.timeline-layer')
     .selectAll('.year')
-    .data(Object.keys(occsByYear), (x) => x)
+    .data(Object.keys(occsByYear), (x) => x);
+
+  bars.exit().remove();
+
+  var newBars = bars
     .enter()
     .append('g')
     .classed('year', true);
@@ -222,19 +270,26 @@ function renderYearMap(sortedOccs) {
     .append('rect')
     .classed('bar', true)
     .attr('height', yearHeight)
+  newBars
+    .append('text')
+    .attr('x', 5)
+    .attr('y', '1em')
+    .classed('year-label', true);
+  newBars
+    .append('text')
+    .attr('x', 5)
+    .attr('y', '2em')
+    .classed('doc-count');
+
+  var existingBars = newBars.merge(bars);
+  existingBars.select('.bar')
     .attr('width', (year) => yearWidthScale(occsByYear[year].length));
-  newBars
-    .append('text')
-    .text((year) => year)
-    .attr('x', 5)
-    .attr('y', '1em');
-  newBars
-    .append('text')
+  existingBars.select('.year-label')
+    .text((year) => year);
+  existingBars.select('.doc-count')
     .text((year) => `${occsByYear[year].length} documents`)
-    .attr('x', 5)
-    .attr('y', '2em');
-  newBars.attr('transform', getTransformForYear);
-  newBars.on('click', onYearClick);
+  existingBars.attr('transform', getTransformForYear);
+  existingBars.on('click', onYearClick);
 }
 
 function renderMonthMap(year) {
@@ -322,7 +377,7 @@ function onDocItemClick(e, occ) {
     `https://embed.documentcloud.org/documents/${occ.document.id}/?embed=1&amp;responsive=1&amp;title=1`
   );
   docContainerSel.attr('title', occ.document.title);
-  docContainerSel.select('.excerpt').text(occ.excerpt);
+  docContainerSel.select('.excerpt').text(`"…${occ.excerpt}…"`);
   docContainerSel.classed('hidden', false);
 }
 
@@ -332,6 +387,7 @@ function onTickClick(e, day) {
 }
 
 function onYearClick(e, year) {
+  currentYear = year;
   var sortedOccs = occsByYear[year];
   if (!sortedOccs || sortedOccs.length < 1) {
     return;
@@ -391,4 +447,77 @@ function getIdForDate(dateString) {
 
 function compareOccDates(a, b) {
   return new Date(a.entity.date) < new Date(b.entity.date) ? -1 : 1;
+}
+
+function distillResult(result) {
+  const asset_url = result.asset_url; //'https://s3.documentcloud.org/';
+  return {
+    id: result.id,
+    canonical_url: result.canonical_url,
+    slug: result.slug,
+    title: result.title,
+    pageTextURL: `${asset_url}documents/${result.id}/${result.slug}.txt.json`
+  };
+}
+
+async function collectOccFromDocResult({
+  id,
+  canonical_url,
+  slug,
+  title,
+  pageTextURL
+}) {
+  try {
+    let res = await fetch(pageTextURL, { mode: 'cors' });
+    let pageInfo = await res.json();
+    console.log('pageInfo', pageInfo);
+    pageInfo.pages.map(getOccurrencesForPage).flat().forEach(updateStateWithOcc);
+  } catch (error) {
+    console.error(`Error while getting pages for ${slug} at ${pageTextURL}`, error);
+  }
+
+  function getOccurrencesForPage({ page, contents }) {
+    var dateResults = findDates(contents);
+    return dateResults.map(getOccurrenceForDateResult);
+
+    function getOccurrenceForDateResult({ match, index }) {
+      const endPos = index + match.length;
+      // Placeholde entity id.
+      const entityId = entityCount;
+      entityCount += 1;
+      try {
+        var date = new Date(match);
+
+        return {
+          page,
+          position: [index, endPos],
+          excerpt: contents.slice(index - 10, endPos + 10),
+          entity: {
+            id: entityId,
+            title: date.toLocaleDateString(),
+            date: date.toISOString()
+          },
+          document: {
+            id,
+            title,
+            url: canonical_url
+          }
+        };
+      } catch (error) {
+        console.error('Error while trying to create date for', match);
+      }
+    }
+  }
+  //   updateStateWithOcc({
+  //  {
+  //       position: [719, 723],
+  //       excerpt: ' MINING & MILLING CO.\n7\nb. fofern Ofsthun\nAg',
+  //       entity: { id: 336, title: '04/07/2023', date: '2023-04-07T00:00:00' },
+  //       document: {
+  //         id: '23586293',
+  //         title: 'SSO21522042313171',
+  //         url: 'https://www.documentcloud.org/documents/23586293-sso21522042313171',
+  //       },
+  //     },
+  //   });
 }
