@@ -379,6 +379,7 @@ function onDocItemClick(e, occ) {
   docContainerSel.attr('title', occ.document.title);
   docContainerSel.select('.excerpt').text(`"…${occ.excerpt}…"`);
   docContainerSel.classed('hidden', false);
+  docCloseSel.classed('hidden', false);
 }
 
 function onTickClick(e, day) {
@@ -417,6 +418,7 @@ function onMonthMapToggleClick() {
 
 function onDocCloseClick() {
   docContainerSel.classed('hidden', true);
+  docCloseSel.classed('hidden', true);
 }
 
 function scrollOccurrenceIntoView(occ) {

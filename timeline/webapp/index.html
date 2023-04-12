@@ -12,8 +12,8 @@
   <div class="control-pane">
     <div id="status-message" class="hidden"></div>
     <button id="year-map-toggle-button">Hide year map</button>
-    <input type="checkbox">Enable zooming with mouse and pinch</input>
     <button id="month-map-toggle-button">Hide month map</button>
+    <button id="doc-close-button">Close document</button>
   </div>
 
   <main class="timelines-container">
@@ -62,11 +62,12 @@
   </main>
 
   <div class="doc-container hidden">
-    <span>Date citation:</span>
-    <pre class="excerpt"></pre>
+    <div class="citation">
+      <span>Date citation:</span>
+      <pre class="excerpt"></pre>
+    </div>
     <iframe id="doc-frame" title="" width="50%" height="90vh"
       sandbox="allow-scripts allow-same-origin allow-popups allow-forms allow-popups-to-escape-sandbox"></iframe>
-    <button id="doc-close-button">Close document</button>
   </div>
 
   <div id="version-info"></div>

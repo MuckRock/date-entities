@@ -17,9 +17,6 @@ To run the webapp locally:
 - sudo python3 server.py
 - Go to https://mitchelljkotler.github.io
 
-/* global d3 */
-sudo python3 server.py
-
 ## Tests
 
 Run tests with `python -m unittest date_entities/tests.py`.

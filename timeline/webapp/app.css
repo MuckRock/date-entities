@@ -128,12 +128,6 @@ line {
   height: 100vh;
 }
 
-#doc-close-button {
-  position: fixed;
-  bottom: var(--control-margin);
-  right: var(--control-margin);
-}
-
 #doc-frame {
   position: fixed;
   right: 0;
@@ -143,9 +137,13 @@ line {
   height: calc(100vh - 100px);
 }
 
-.excerpt {
+.citation {
   position: fixed;
   top: 0;
+  padding: 0.5em;
+  background: hsl(0, 0%, 90%);
+  border: 1px black solid;
+  border-radius: 4px;
 }
 
 .date-docs-container ul {
