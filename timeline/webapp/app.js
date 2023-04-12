@@ -18,6 +18,7 @@ const monthHeight =
 const dayHeight = 64;
 const maxBarLength = 200;
 const dayTimelineHeight = 365 * dayHeight;
+const minReasonableDate = new Date(1000, 0, 0);
 
 var englishMonthNames = [
   'January',
@@ -480,7 +481,7 @@ async function collectOccFromDocResult({
 
   function getOccurrencesForPage({ page, contents }) {
     var dateResults = findDates(contents);
-    return dateResults.map(getOccurrenceForDateResult);
+    return dateResults.filter(({ match }) => new Date(match) >= minReasonableDate).map(getOccurrenceForDateResult);
 
     function getOccurrenceForDateResult({ match, index }) {
       const endPos = index + match.length;
