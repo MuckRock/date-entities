@@ -375,7 +375,7 @@ function getTransformForYear(year, i) {
 function onDocItemClick(e, occ) {
   docFrameSel.attr(
     'src',
-    `https://embed.documentcloud.org/documents/${occ.document.id}/?embed=1&amp;responsive=1&amp;title=1`
+    `https://embed.documentcloud.org/documents/${occ.document.id}/#document/p${occ.page + 1}`
   );
   docContainerSel.attr('title', occ.document.title);
   docContainerSel.select('.excerpt').text(`"…${occ.excerpt}…"`);
@@ -485,7 +485,7 @@ async function collectOccFromDocResult({
 
     function getOccurrenceForDateResult({ match, index }) {
       const endPos = index + match.length;
-      // Placeholde entity id.
+      // Placeholder entity id.
       const entityId = entityCount;
       entityCount += 1;
       try {
