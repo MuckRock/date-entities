@@ -30,7 +30,7 @@ Once that's running locally, along with [Squarelet](https://github.com/muckrock/
   - `export DCPASS=<Your local squarelet password, not your prod username>`
   - Run `make try`, which will pass those environment variable values to main.py/the documentcloud client.
 
-  ## Known issues
+## Known issues
 
-  - Occurrences seem to correctly refer to an entity, but `offset` and `content` values are lost.
-  - Pages, rather than full text, should probably be used in occurrences to say where the entities are in the document.
+- Occurrences seem to correctly refer to an entity, but `offset` and `content` values are lost.
+- Pages, rather than full text, should probably be used in occurrences to say where the entities are in the document.
